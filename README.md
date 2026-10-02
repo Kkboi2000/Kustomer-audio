@@ -6,9 +6,11 @@ A pocket audio app that installs on your phone like a native app. No build step,
 
 ## Tools
 
-**Kustom** keeps your own sound pads in groups. Tap a pad to play it. Long-press (phone) or right-click (computer) a pad to rename it, replace its audio, move it to another group, or delete it. Tap or long-press a group name to rename it, change its color, or delete it. Groups and sounds are saved on the device, so they're still there when you reopen the app.
+**Kustom** is a soundboard you build yourself. One group fills the screen as a grid of sounds. Tap a sound to play it. **☰** switches groups or makes a new one, **🔊** stops everything that's playing, **🔍** searches the group, **⋮** renames, recolors or deletes it, and **+** adds a sound by recording it or choosing a file. Long-press (phone) or right-click (computer) a sound to rename, trim, replace, move or delete it. Everything is saved on the device, and the app reopens on the group you last used.
 
-**Reverse** has three keys. 🎙️ records (tap again to stop), ▶ plays the recording, ⟲ flips it backwards and plays it. Tap ⟲ again to flip it back.
+**Trimming** happens right after you record or pick a file, and any time later from a sound's edit menu. Drag the two handles on the waveform, press ▶ to hear the result, then save. Recordings start with the handles already moved past the silence at each end. Trimming never cuts the original audio, so you can always widen it again.
+
+**Reverse** has three keys. 🎙️ records (tap again to stop), ▶ plays the recording forwards, ⟲ plays it backwards, with the playhead running right to left across the waveform.
 
 **DJ** has two keys. 🎙️ starts recording; tapping it again stops and immediately loops the recording, gapless, over and over. ⏹ stops the loop.
 
@@ -46,12 +48,13 @@ js/audio.js           recording, decoding, playback, reversing
 js/store.js           saving Kustom groups and sounds in IndexedDB
 js/ui.js              shared pieces: tap vs. long-press, sheets, prompts
 js/screen.js          the waveform display
+js/trimmer.js         the trim handles
 js/tools/*.js         one file per tool
 sw.js                 offline support
 manifest.webmanifest  what makes it installable
 ```
 
-Each tool is an object with a `title` and a `mount(element)` that returns a cleanup function. Leaving a tool always runs its cleanup, so nothing keeps playing or recording in the background. To add a fourth tool, write `js/tools/yourtool.js`, add it to `tools` in `main.js`, add a link on the tools page, and list the new file in `sw.js`.
+Each tool is an object with a `title` and a `mount(body, { title, actions })` that returns a cleanup function; a tool can put its own controls in the page header, as Kustom does. Leaving a tool always runs its cleanup, so nothing keeps playing or recording in the background. To add a fourth tool, write `js/tools/yourtool.js`, add it to `tools` in `main.js`, add a link on the tools page, and list the new file in `sw.js`.
 
 ## Good to know
 

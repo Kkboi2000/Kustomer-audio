@@ -2,7 +2,7 @@
 // right away) and refresh the cache. Offline: serve the cached copy.
 // Bump VERSION when you add or rename files below.
 
-const VERSION = 'kustom-audio-v1';
+const VERSION = 'kustom-audio-v2';
 
 const APP_FILES = [
   './',
@@ -14,6 +14,7 @@ const APP_FILES = [
   'js/store.js',
   'js/ui.js',
   'js/screen.js',
+  'js/trimmer.js',
   'js/tools/kustom.js',
   'js/tools/reverse.js',
   'js/tools/dj.js',
